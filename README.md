@@ -1,14 +1,47 @@
-# SAP LeanIX Custom Report
+# Global Compliance Architecture
 
-A minimal custom report starter template showcasing SAP LeanIX Reporting SDK basics.
+> Connecting portfolio risk, compliance readiness and governance signals into one executive view.
 
-## Features
+## Contest Submission Summary
 
-- Fetches Applications from SAP LeanIX workspace
-- Groups applications by business criticality level
-- Displays interactive bar chart with Chart.js
-- Clean separation of concerns (UI, visualization)
-- TypeScript for type safety
+**1.1 Relevance — Real EA Problem**  
+Global Compliance Architecture addresses an Enterprise Architecture problem: compliance information is fragmented across regulations, applications, risk assessments, and governance. Executives need a connected view showing where regulatory exposure exists, why it matters, and what decision should follow.
+
+**1.2 Value Beyond Out-of-the-Box Reports**  
+The report goes beyond a conventional compliance dashboard by connecting portfolio risk, compliance readiness, regulatory scope, and governance in one experience. Its operating cycle — **Discover → Determine → Assess → Control → Evidence → Improve** — turns compliance from a static assessment into an architecture operating model. A 195-country jurisdiction catalogue provides a reusable global lens, with India and Germany data points.
+
+**2.1 Execution — Reliable Reporting**  
+The report runs as a deployable SAP LeanIX Custom Report in the shared **CustomCodeChallenge09** demo workspace. It uses the Standard V4 metamodel and live LeanIX application data. Risk and compliance signals are calculated from available workspace attributes rather than fabricated values. Missing risk dimensions are excluded from the denominator, preserving transparency.
+
+**2.2 Execution — Readable Visualization**  
+The experience provides KPIs, portfolio risk, application exposure, jurisdiction insights, operating-cycle visualization, and drill-down details. Users can inspect an application’s risk calculation, including weighted contributions, normalized score, classification, and data-quality coverage.
+
+**2.3 Execution — Configurable and Adaptable**  
+Reusable risk logic is separated from the jurisdiction lens, allowing the pattern to adapt to countries, regulations, stakeholders, and portfolio contexts without changing the workspace metamodel.
+
+**3.1 Breadth — Broad EA Applicability**  
+The pattern is relevant beyond compliance specialists. Enterprise Architects, security and risk teams, compliance leaders, application owners, transformation teams, and executives can connect regulatory obligations with portfolio decisions across geographies and industries.
+
+**4. Adoption Potential — Customer Value**  
+Other SAP LeanIX customers can use this as a bridge between regulatory awareness and architecture decisions: identifying exposure, explaining risk, and prioritizing action.
+
+**AI-Assisted Development & Governance**  
+Development followed the contest guidance through small, testable iterations, AI assistance, and live-data validation. We used a prototype-first approach: the **Compliance Security Risk Heatmap** was developed and validated as a pre-MVP and published in GitHub. After validating the risk and compliance signals with LeanIX application data, we evolved the concept into **Global Compliance Architecture**, scaling the validated foundation into an executive experience covering jurisdiction, regulation, controls, risk, evidence, and application exposure. This demonstrates MVP validation before scaling into a reusable global architecture pattern. The V4 metamodel and administrative settings were left unchanged.
+
+### Pre-MVP
+
+[Compliance Security Risk Heatmap](https://github.com/nbnayak88/compliance-security-risk-heatmap) — the validated first-stage MVP that established the risk/compliance foundation used to evolve this report.
+
+## What the Report Provides
+
+- Executive Summary and portfolio-level compliance signal
+- Global regulatory lens across **195 countries**
+- Concrete jurisdiction data points for selected countries including **India and Germany**
+- Continuous compliance flywheel: **Discover → Determine → Assess → Control → Evidence → Improve**
+- Portfolio risk distribution and application compliance exposure
+- Explainable, weighted risk calculation with data-quality coverage
+- Glossary and architecture traceability from jurisdiction to application
+- Application drill-down for risk and compliance context
 
 ## Development
 
@@ -18,43 +51,17 @@ Install dependencies:
 npm install
 ```
 
-**Important:** Authenticate with your SAP LeanIX workspace before starting development. The recommended way is OAuth via the CLI:
+Authenticate with SAP LeanIX before starting development:
 
 ```bash
 npx lxr login
 ```
 
-This opens a browser window, completes the OAuth flow, and saves credentials to `~/.leanix/lxr.json`.
-
-Alternatively, create a `lxr.json` file in the project root with an API token:
-
-```json
-{
-  "host": "your-workspace.leanix.net",
-  "apitoken": "your-api-token"
-}
-```
-
-A project-level `lxr.json` takes precedence over the user-level one. Either way, add `lxr.json` to your `.gitignore` — it contains sensitive credentials.
-
-Start development server:
+Start the development server:
 
 ```bash
 npm run dev
 ```
-
-The report will run against your SAP LeanIX workspace configured in `lxr.json`.
-
-## Project Structure
-
-```
-src/
-├── App.tsx           # Main component with data logic, SAP LeanIX configuration, and chart visualization
-├── App.css           # Styles
-└── main.tsx          # Application entry point
-```
-
-## Build
 
 Build for production:
 
@@ -62,43 +69,27 @@ Build for production:
 npm run build
 ```
 
-Output will be in the `dist/` folder.
-
-## Upload to SAP LeanIX
-
-Upload the report to your SAP LeanIX workspace:
+Upload to SAP LeanIX:
 
 ```bash
 npm run upload
 ```
 
-This builds and uploads the report using credentials from `lxr.json`.
+## Project Structure
 
-## Customization
-
-### Change What Data to Fetch
-
-Edit the `attributes` array in `src/App.tsx`:
-
-```typescript
-attributes: ['id', 'displayName', 'businessCriticality'];
+```text
+src/
+├── App.tsx
+├── App.css
+└── main.tsx
 ```
 
-To use a different field, update the `FIELD_NAME` constant in `src/App.tsx`.
+## Design & Governance Notes
 
-### Modify the Visualization
-
-Edit `src/App.tsx` to change how data is grouped and displayed.
-
-Edit `src/App.tsx` to customize the Chart.js configuration.
-
-### Query Different Fact Sheet Types
-
-Change `fixedFactSheetType` in `src/App.tsx`:
-
-```typescript
-fixedFactSheetType: 'BusinessCapability'; // or 'Project', 'ITComponent', etc.
-```
+- Uses live LeanIX workspace application data.
+- Does **not** modify the shared workspace metamodel or administrative settings.
+- Regulatory information is presented as a jurisdiction lens; application-level compliance is not inferred where the workspace does not expose authoritative jurisdiction assignment.
+- Missing assessment dimensions are treated as missing data rather than automatically as zero risk.
 
 ## Learn More
 
